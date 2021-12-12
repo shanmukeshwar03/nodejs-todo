@@ -1,0 +1,9 @@
+services:
+  auth:
+    image: auth
+    build: .
+    restart: unless-stopped
+    ports:
+      - '5005:5005'
+    expose:
+      - '5005'
