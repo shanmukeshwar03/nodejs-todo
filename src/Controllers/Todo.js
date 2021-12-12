@@ -14,8 +14,8 @@ const GetTodo = async (req, res, next) => {
 
 const PostTodo = async (req, res, next) => {
   try {
-    const { content } = req.body
-    if (!content) throw { id: 5 }
+    const { content, date } = req.body
+    if (!content || !date) throw { id: 5 }
     const todo = await TodoModal.create({ content, user: req._id })
     res.send(todo)
   } catch (error) {
@@ -25,11 +25,26 @@ const PostTodo = async (req, res, next) => {
 
 const PatchTodo = async (req, res, next) => {
   try {
-    const { _id, content, status } = req.body
-    if (!_id || !content || !status) throw { id: 5 }
-    const todo = await TodoModal.findByIdAndUpdate(_id, { content, status })
+    const { _id, content, date } = req.body
+    if (!_id || !content || !date) throw { id: 5 }
+    const todo = await TodoModal.findByIdAndUpdate(_id, { content, date })
     if (!todo) throw { id: 2 }
 
+    res.send('Ok')
+  } catch (error) {
+    next(error)
+  }
+}
+
+const ToggleStatus = async (req, res, next) => {
+  try {
+    const { _id } = req.params
+    if (!_id) throw { _id: 5 }
+    const todo = await TodoModal.findById(_id)
+    if (!todo) throw { id: 2 }
+
+    todo.status = !todo.status
+    await todo.save()
     res.send('Ok')
   } catch (error) {
     next(error)
@@ -49,4 +64,4 @@ const DeleteTodo = async (req, res, next) => {
   }
 }
 
-export default { GetTodo, PostTodo, DeleteTodo, PatchTodo }
+export default { GetTodo, PostTodo, DeleteTodo, PatchTodo, ToggleStatus }
