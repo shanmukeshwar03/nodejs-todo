@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import compression from 'compression'
 import cookieParser from 'cookie-parser'
 
 import ErrorMiddleware from './Middleware/Error.js'
@@ -15,7 +14,6 @@ app.use(cookieParser())
 app.use(
   cors({ origin: JSON.parse(process.env.ORIGIN).whitelist, credentials: true })
 )
-app.use(compression())
 
 mongoose.connect(
   process.env.MONGO_URL,

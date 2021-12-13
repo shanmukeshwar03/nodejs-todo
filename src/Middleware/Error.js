@@ -17,7 +17,7 @@ const Error = (error, req, res, next) => {
       res.status(400).send(`Syntax Error!`)
       break
     case 11:
-      res.status(401).send('Unauthorised')
+      res.status(401).send('Unauthorised Request')
       break
     case 12:
       res.status(401).send({ expired: 'Session Expired' })

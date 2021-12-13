@@ -12,7 +12,6 @@
   "author": "shanmukeshwar",
   "license": "ISC",
   "dependencies": {
-    "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
