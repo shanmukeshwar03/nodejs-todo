@@ -11,10 +11,15 @@ const Todo = mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
   user: {
     type: mongoose.Types.ObjectId,
+    select: false,
+    required: true,
+  },
+  client_id: {
+    type: String,
     required: true,
   },
 })
